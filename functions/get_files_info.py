@@ -6,7 +6,7 @@ def get_files_info(working_directory, directory=None):
         return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
     
     if not os.path.isdir(os.path.abspath(os.path.join(working_directory,directory))):
-        return ""
+        return f'Error: "{directory}" is not a directory'
     
     
     try:
@@ -14,7 +14,7 @@ def get_files_info(working_directory, directory=None):
         return_string = []
         directory_list = os.listdir(directory_path)
         if len(directory_list) == 0:
-            return f"No files in directory: {directory_path}"
+            return ""
         for item in directory_list:
             item_path = os.path.join(directory_path, item)
             return_string.append(f"- {item}: file_size={os.path.getsize(item_path)} bytes, is_dir={os.path.isdir(item_path)}")
@@ -22,12 +22,3 @@ def get_files_info(working_directory, directory=None):
         return "\n".join(return_string)
     except OSError as error:
         return f"Error: {error}"
-
-
-
-
-
-
-    
-     
-
